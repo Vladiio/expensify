@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import { 
   SET_END_DATE,
   SET_START_DATE,
@@ -9,8 +11,8 @@ import {
 const filterReducerInitial = {
   text: '',
   sortBy: 'date',
-  startDate: undefined,
-  endDate: undefined
+  startDate: moment().startOf('month'),
+  endDate: moment().endOf('month')
 }
 
 const filterReducer = (

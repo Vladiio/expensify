@@ -31,8 +31,8 @@ const expensesReducer = (
             ...expense,
             ...updates
           };
-        return expense
         }
+        return expense
       });
     default:
       return state;
