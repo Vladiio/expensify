@@ -1,11 +1,12 @@
-import { ADD_EXPENSE, REMOVE_EXPENSE, EDIT_EXPENSE } from '../actions/constants';
+import {
+  ADD_EXPENSE,
+  REMOVE_EXPENSE,
+  EDIT_EXPENSE
+} from '../actions/constants';
 
 const expensesReducerInitial = [];
 
-const expensesReducer = (
-  state = expensesReducerInitial,
-  action
-) => {
+const expensesReducer = (state = expensesReducerInitial, action) => {
   switch (action.type) {
     case ADD_EXPENSE:
       return [
@@ -18,11 +19,9 @@ const expensesReducer = (
           createdAt: action.createdAt
         }
       ];
-    
+
     case REMOVE_EXPENSE:
-      return state.filter(expense => (
-        expense.id !== action.id
-      ));
+      return state.filter(expense => expense.id !== action.id);
     case EDIT_EXPENSE:
       const { updates, id } = action;
       return state.map(expense => {
@@ -32,7 +31,7 @@ const expensesReducer = (
             ...updates
           };
         }
-        return expense
+        return expense;
       });
     default:
       return state;

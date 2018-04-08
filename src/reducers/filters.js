@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import { 
+import {
   SET_END_DATE,
   SET_START_DATE,
   SET_FILTER,
@@ -13,12 +13,9 @@ const filterReducerInitial = {
   sortBy: 'date',
   startDate: moment().startOf('month'),
   endDate: moment().endOf('month')
-}
+};
 
-const filterReducer = (
-  state = filterReducerInitial,
-  action
-) => {
+const filterReducer = (state = filterReducerInitial, action) => {
   switch (action.type) {
     case SET_END_DATE:
       return {
