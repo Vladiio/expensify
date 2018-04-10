@@ -4,18 +4,27 @@ import expensesReducer from '../../reducers/expenses';
 
 import expenses from '../fixtures/expenses';
 
-
 it('should setup state with default', () => {
   expect(expensesReducer(undefined, { type: '@@INIT' })).toEqual([]);
 });
 
 it('should add a new expense', () => {
+  const expense = {
+    id: '4',
+    description: 'new one',
+    note: '',
+    amount: 666,
+    createdAt: 1000
+  };
   expect(
-    expensesReducer(undefined, {
+    expensesReducer(expenses, {
       type: 'ADD_EXPENSE',
-      ...expenses[0]
+      ...expense
     })
-  ).toEqual([expenses[0]]);
+  ).toEqual([
+    ...expenses,
+    expense
+  ]);
 });
 
 it('should remove an expense by id', () => {
@@ -25,6 +34,15 @@ it('should remove an expense by id', () => {
       id: expenses[1].id
     })
   ).toEqual([expenses[0], expenses[2]]);
+});
+
+it('should not remove an expense if id not found', () => {
+  expect(
+    expensesReducer(expenses, {
+      type: 'REMOVE_EXPENSE',
+      id: 'fancyId'
+    })
+  ).toEqual(expenses);
 });
 
 it('should edit an expense by id', () => {
@@ -42,3 +60,12 @@ it('should edit an expense by id', () => {
     ...updates
   });
 });
+
+it('should not edit any expenses if id not found', () => {
+  expect(
+    expensesReducer(expenses, {
+      type: 'EDIT_EXPENSE',
+      id: 'fancyId'
+    })
+  ).toEqual(expenses)
+})
