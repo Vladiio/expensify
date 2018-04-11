@@ -1,17 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ExpenseListItem = ({
-  id, 
+export const ExpenseListItem = ({
+  id,
   description,
   amount,
-  createdAt,
+  createdAt
 }) => (
   <div>
     <Link to={`/edit/${id}`}>
       <h4>{description}</h4>
     </Link>
-    <p>{amount} - {createdAt}</p>
+    <p>
+      {amount} - {createdAt}
+    </p>
   </div>
 );
 
