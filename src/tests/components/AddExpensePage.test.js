@@ -5,13 +5,13 @@ import { AddExpensePage } from '../../componenets/AddExpensePage';
 import expenses from '../fixtures/expenses';
 
 
-let onSubmit, history, wrapper;
+let addExpense, history, wrapper;
 
 beforeEach(() => {
-  onSubmit = jest.fn();
+  addExpense = jest.fn();
   history = { push: jest.fn() };
   wrapper = shallow(
-    <AddExpensePage onSubmit={onSubmit} history={history} />
+    <AddExpensePage addExpense={addExpense} history={history} />
   );
 })
 
@@ -21,6 +21,6 @@ it('should render AddExpensePage correctly', () => {
 
 it('should handle onSubmit', () => {
   wrapper.find('ExpenseForm').prop('onSubmit')(expenses[0]);
-  expect(onSubmit).toHaveBeenLastCalledWith(expenses[0]);
+  expect(addExpense).toHaveBeenLastCalledWith(expenses[0]);
   expect(history.push).toHaveBeenLastCalledWith('/');
 });
