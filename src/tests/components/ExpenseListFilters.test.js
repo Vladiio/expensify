@@ -39,3 +39,41 @@ it('should handle dates change', () => {
   expect(spies.setEndDate)
     .toHaveBeenLastCalledWith(endDate);
 });
+
+it('should set focusedInput on focus change', () => {
+  let focusedInput = 'startDate';
+  wrapper
+    .find('DateRangePicker')
+    .prop('onFocusChange')(focusedInput);
+  expect(wrapper.state('focusedInput')).toBe(focusedInput);
+
+  focusedInput = 'endDate';
+  wrapper
+    .find('DateRangePicker')
+    .prop('onFocusChange')(focusedInput);
+  expect(wrapper.state('focusedInput')).toBe(focusedInput)
+});
+
+it('should handle text change', () => {
+  wrapper
+    .find('input[type="text"]')
+    .simulate('change', {
+      target: {
+        value: altFilters.text
+      }
+    });
+  expect(spies.setTextFilter)
+    .toHaveBeenLastCalledWith(altFilters.text)
+});
+
+it('should handle sort change', () => {
+  wrapper
+    .find('select')
+    .simulate('change', {
+      target: {
+        value: altFilters.sortBy
+      }
+    });
+  expect(spies.setOrderBy)
+    .toHaveBeenLastCalledWith(altFilters.sortBy)
+})
